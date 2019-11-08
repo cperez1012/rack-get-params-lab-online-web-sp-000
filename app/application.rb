@@ -1,5 +1,6 @@
 class Application
 
+  @@cart = []
   @@items = ["Apples","Carrots","Pears"]
 
   def call(env)
@@ -13,6 +14,15 @@ class Application
     elsif req.path.match(/search/)
       search_term = req.params["q"]
       resp.write handle_search(search_term)
+    elsif req.path.match(/cart/)
+      if @@cart.any? == true
+        @@cart.each do |cart_item|
+          resp.write "#{cart_item}\n"
+        end
+      else
+        resp.write "Your cart is empty"
+      end
+
     else
       resp.write "Path Not Found"
     end
@@ -27,4 +37,5 @@ class Application
       return "Couldn't find #{search_term}"
     end
   end
+
 end
