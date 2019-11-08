@@ -27,7 +27,7 @@ class Application
           if @@items.include?(search_item)
             @@cart << search_item
             resp.write "added #{search_item}"
-          else 
+          else
             resp.write "We don't have that item"
           end
 
